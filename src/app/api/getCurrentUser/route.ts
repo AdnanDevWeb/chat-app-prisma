@@ -1,7 +1,5 @@
 import { prisma } from "@/lib/db";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { User } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -17,7 +15,7 @@ export async function GET(req: Request, res: Response){
             where: {id: session?.user.id}
         })
 
-        console.log(currentUser);
+        console.log(currentUser)
         return NextResponse.json(currentUser)
     }catch(err){
         console.log(err)

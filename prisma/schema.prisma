@@ -40,7 +40,7 @@ model User {
   name          String
   email         String    @unique
   emailVerified DateTime?
-  image         String?
+  image         String    @default("https://i.pinimg.com/originals/90/de/25/90de257fdac14d35d66a81ab8e282cad.jpg")
   bio           String?   @default("Consider creating a bio !")
   accounts      Account[]
   sessions      Session[]

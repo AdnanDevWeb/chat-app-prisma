@@ -15,8 +15,15 @@ const UserContextProvider: FC<IProps> = ({ children }) => {
     async function getUser() {
       try {
         const response = await fetch('/api/getCurrentUser');
-        const result = await response.json();
-        setUser(result);
+        const { bio, email, id, name, image, emailVerified } = await response.json() as User;
+        setUser({
+          id,
+          email,
+          name,
+          image,
+          bio,
+          emailVerified,
+        });
       } catch (error) {
         console.error("Error fetching user:", error);
       }

@@ -7,7 +7,6 @@ export default async function Home() {
 
   const session = await getServerSession(authOptions)
   if(!session) redirect('/signin')
-  console.log(session.user.id);
   return (
       <div className='grid grid-cols-[300px,1fr]'>
         <div>

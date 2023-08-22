@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/db";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { Session } from "inspector";
 import { getServerSession } from "next-auth";
 import { z } from "zod";
 
@@ -21,7 +22,7 @@ export async function POST(req: Request){
 
         const updatedUser = await prisma.user.update({
             where: {
-                id: session!.user.id
+                id: session?.user.id
             },
             data: {
                 name: name,
@@ -30,9 +31,10 @@ export async function POST(req: Request){
             }
         })
 
-        console.log(updatedUser)
+        console.log("updated user:", updatedUser)
         return new Response('OK')
     } catch (error) {
+        console.log(error)
         return new Response('Not okay')
     }
 }
