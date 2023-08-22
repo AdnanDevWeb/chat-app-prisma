@@ -14,7 +14,7 @@ const UserContextProvider: FC<IProps> = ({ children }) => {
   useEffect(() => {
     async function getUser() {
       try {
-        const response = await fetch('/api/get/currentuser');
+        const response = await fetch('/api/getCurrentUser');
         const result = await response.json();
         setUser(result);
       } catch (error) {
