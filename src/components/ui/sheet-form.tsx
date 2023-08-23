@@ -14,16 +14,17 @@ import {
 } from "./form"
 import { Input } from "./input"
 import { toast } from "./use-toast"
-import { useContext, useState } from "react"
-import { UserContext } from "../../../contexts/user-context"
 import Image from "next/image"
 import { UploadButton } from "@/lib/uploadthing"
 import { Label } from "./label"
-
+import { useUser } from "../../../state/user-state"
+import { useState } from "react"
 
 export default function SheetForm() {
-    const {user} = useContext(UserContext)
+/*     const {user} = useContext(UserContext)
+ */
 
+    const { data: user, isLoading } = useUser()
 
     const [usernameValue, setUsernameValue] = useState(user?.name)
     const [bioValue, setBioValue] = useState(user?.bio || 'My awesome bio')
@@ -48,7 +49,7 @@ export default function SheetForm() {
         toast({
           title: 'You submitted these values:',
           description: <code>
-            <pre className="p-[10px] overflow-x-auto whitespace-pre-wrap block">{JSON.stringify(reqBody, null, 2)}</pre>
+             <pre className="p-[10px] overflow-x-auto whitespace-pre-wrap block">{JSON.stringify(reqBody, null, 2)}</pre>
           </code>
         })
       } catch (error) {

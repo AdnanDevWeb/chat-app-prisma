@@ -44,6 +44,29 @@ model User {
   bio           String?   @default("Consider creating a bio !")
   accounts      Account[]
   sessions      Session[]
+  sentFriendRequests FriendRequest[] @relation("SenderRelation")
+  receivedFriendRequests FriendRequest[] @relation("ReceiverRelation")
+  user1FriendShips      FriendShip[]    @relation("User1RelationShips")
+  user2FriendShips      FriendShip[]    @relation("User2RelationShips")
+}
+
+model FriendShip {
+  id            Int       @id @default(autoincrement())
+  user1       User      @relation( "User1RelationShips", fields: [user1Id], references: [id])
+  user1Id       String   @unique
+  user2        User      @relation( "User2RelationShips", fields: [user2Id], references: [id])
+  user2Id      String     @unique
+  createdAt     DateTime  @default(now())
+  @@unique([user1Id, user2Id])
+}
+
+model FriendRequest {
+  id            Int       @id @default(autoincrement())
+  sender        User      @relation("SenderRelation", fields: [senderId], references: [id])
+  senderId      String    @unique
+  receiver      User      @relation("ReceiverRelation", fields: [emailToAdd], references: [email])
+  emailToAdd    String    @unique
+  status        String    @default("Pending") // You can define different statuses like "Accepted", "Declined", etc.
 }
 
 model VerificationToken {

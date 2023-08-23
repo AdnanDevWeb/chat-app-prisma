@@ -1,9 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import UserContextProvider from '../../contexts/user-context'
 import { ThemeProvider } from '@/components/ui/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Providers from '@/lib/provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,15 +18,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const queryClient = new QueryClient()
   return (
     <html lang="en">
 
       <body className={inter.className}>
-        <UserContextProvider>
           <ThemeProvider>
-            {children}
+              <Providers>
+                {children}
+              </Providers>
           </ThemeProvider>
-        </UserContextProvider>
         <Toaster />
       </body>
     </html>

@@ -25,7 +25,7 @@ interface IProps {
 
 const TopBar:FC<IProps> = ({session}) => {
 
-    return <div className="p-3 flex justify-between">
+    return <div className="flex justify-between">
         <Sheet>
             <SheetTrigger className={cn("bg-secondary text-secondary-foreground hover:bg-secondary/80",   "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 px-2", )}>
                 <span>Edit profile</span>
